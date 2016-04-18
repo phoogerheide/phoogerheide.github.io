@@ -1,13 +1,9 @@
-function bouncyButton(){
-    var ele = document.getElementById("btn4");
-    dynamics.animate(ele, {
-        translateY: -8,
-        scale: 1,
-        opacity: 0.5
-    }, {
-        type: dynamics.forceWithGravity,
-        bounciness: 400,
-        elasticity: 500,
-        duration: 600
-    });   
-}
+    function onmousebtn(btn){
+        document.getElementById(btn).style.borderColor = "#A58322";
+        document.getElementById(btn).style.background = "#bbb";
+    };
+
+    function onmsleave(btn){
+        document.getElementById(btn).style.borderColor = "#855300";
+        document.getElementById(btn).style.background = "#aaa";
+    };
