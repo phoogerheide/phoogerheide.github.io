@@ -1,57 +1,297 @@
-<!DOCTYPE html>
-
 <html>
 <head>
   <title>Phoogerheide's github</title>
   <link rel="stylesheet" type="text/css" href="mystyle.css">
   <script src="myScript.js"></script>
 </head>
-<body class="mainbody">
-  <div id="toplogo">
+<canvas id="sakura"></canvas>
+<div class="btnbg">
+</div>
 
-  </div>
-  <div id="wrapper">
-    <div class="topbar">
-      <button id="btn1" onmouseover="onmousebtn('btn1')" onmouseleave="onmsleave('btn1')">Home</button>
-      <button id="btn2" onmouseover="onmousebtn('btn2')" onmouseleave="onmsleave('btn2')">News</button>
-      <button id="btn3" onmouseover="onmousebtn('btn3')" onmouseleave="onmsleave('btn3')">Products</button>
-      <button id="btn4" onmouseover="onmousebtn('btn4')" onmouseleave="onmsleave('btn4')">Blog</button>
-      <button id="btn5" onmouseover="onmousebtn('btn5')" onmouseleave="onmsleave('btn5')">Contact</button>
-    </div>
+<!-- sakura shader -->
+<script id="sakura_point_vsh" type="x-shader/x_vertex">
+uniform mat4 uProjection;
+uniform mat4 uModelview;
+uniform vec3 uResolution;
+uniform vec3 uOffset;
+uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
+uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
 
-    <div class="pagecontent">
-      <h1>Catchy Title</h1>
-      <br>
-      <p>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
-        <br><br>
-        Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi.
-        <br><br>
-        Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In ac felis quis tortor malesuada pretium. Pellentesque auctor neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Aenean viverra rhoncus pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis. Curabitur a felis in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Sed hendrerit. Morbi ac felis. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Nunc nulla. Fusce risus nisl, viverra et, tempor et, pretium in, sapien. Donec venenatis vulputate lorem.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        Morbi nec metus. Phasellus blandit leo ut odio. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. In auctor lobortis lacus. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Vestibulum ullamcorper mauris at ligula. Fusce fermentum. Nullam cursus lacinia erat. Praesent blandit laoreet nibh.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-        Fusce convallis metus id felis luctus adipiscing. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus. Vestibulum dapibus nunc ac augue. Curabitur vestibulum aliquam leo. Praesent egestas neque eu enim. In hac habitasse platea dictumst. Fusce a quam. Etiam ut purus mattis mauris sodales aliquam. Curabitur nisi. Quisque malesuada placerat nisl. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus.
-        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.
-        <br><br>
-      </p>
-      <div id="footer">
-        copyright @ example.com
-      </div>
-    </div>
-  </div>
-</body>
+attribute vec3 aPosition;
+attribute vec3 aEuler;
+attribute vec2 aMisc; //x:size, y:fade
+
+varying vec3 pposition;
+varying float psize;
+varying float palpha;
+varying float pdist;
+
+//varying mat3 rotMat;
+varying vec3 normX;
+varying vec3 normY;
+varying vec3 normZ;
+varying vec3 normal;
+
+varying float diffuse;
+varying float specular;
+varying float rstop;
+varying float distancefade;
+
+void main(void) {
+    // Projection is based on vertical angle
+    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);
+    gl_Position = uProjection * pos;
+    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;
+
+    pposition = pos.xyz;
+    psize = aMisc.x;
+    pdist = length(pos.xyz);
+    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);
+
+    vec3 elrsn = sin(aEuler);
+    vec3 elrcs = cos(aEuler);
+    mat3 rotx = mat3(
+        1.0, 0.0, 0.0,
+        0.0, elrcs.x, elrsn.x,
+        0.0, -elrsn.x, elrcs.x
+    );
+    mat3 roty = mat3(
+        elrcs.y, 0.0, -elrsn.y,
+        0.0, 1.0, 0.0,
+        elrsn.y, 0.0, elrcs.y
+    );
+    mat3 rotz = mat3(
+        elrcs.z, elrsn.z, 0.0,
+        -elrsn.z, elrcs.z, 0.0,
+        0.0, 0.0, 1.0
+    );
+    mat3 rotmat = rotx * roty * rotz;
+    normal = rotmat[2];
+
+    mat3 trrotm = mat3(
+        rotmat[0][0], rotmat[1][0], rotmat[2][0],
+        rotmat[0][1], rotmat[1][1], rotmat[2][1],
+        rotmat[0][2], rotmat[1][2], rotmat[2][2]
+    );
+    normX = trrotm[0];
+    normY = trrotm[1];
+    normZ = trrotm[2];
+
+    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);
+
+    float tmpdfs = dot(lit, normal);
+    if(tmpdfs < 0.0) {
+        normal = -normal;
+        tmpdfs = dot(lit, normal);
+    }
+    diffuse = 0.4 + tmpdfs;
+
+    vec3 eyev = normalize(-pos.xyz);
+    if(dot(eyev, normal) > 0.0) {
+        vec3 hv = normalize(eyev + lit);
+        specular = pow(max(dot(hv, normal), 0.0), 20.0);
+    }
+    else {
+        specular = 0.0;
+    }
+
+    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);
+    rstop = pow(rstop, 0.5);
+    //-0.69315 = ln(0.5)
+    distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
+}
+</script>
+<script id="sakura_point_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+
+uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
+uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
+
+const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
+
+varying vec3 pposition;
+varying float psize;
+varying float palpha;
+varying float pdist;
+
+//varying mat3 rotMat;
+varying vec3 normX;
+varying vec3 normY;
+varying vec3 normZ;
+varying vec3 normal;
+
+varying float diffuse;
+varying float specular;
+varying float rstop;
+varying float distancefade;
+
+float ellipse(vec2 p, vec2 o, vec2 r) {
+    vec2 lp = (p - o) / r;
+    return length(lp) - 1.0;
+}
+
+void main(void) {
+    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.0;
+    vec3 d = vec3(0.0, 0.0, -1.0);
+    float nd = normZ.z; //dot(-normZ, d);
+    if(abs(nd) < 0.0001) discard;
+
+    float np = dot(normZ, p);
+    vec3 tp = p + d * np / nd;
+    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));
+
+    //angle = 15 degree
+    const float flwrsn = 0.258819045102521;
+    const float flwrcs = 0.965925826289068;
+    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);
+    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;
+
+    float r;
+    if(flwrp.x < 0.0) {
+        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);
+    }
+    else {
+        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);
+    }
+
+    if(r > rstop) discard;
+
+    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);
+    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));
+    col *= vec3(1.0, grady, grady);
+    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));
+    col = col * diffuse + specular;
+
+    col = mix(fadeCol, col, distancefade);
+
+    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;
+    alpha = smoothstep(0.0, 1.0, alpha) * palpha;
+
+    gl_FragColor = vec4(col * 0.5, alpha);
+}
+</script>
+<!-- effects -->
+<script id="fx_common_vsh" type="x-shader/x_vertex">
+uniform vec3 uResolution;
+attribute vec2 aPosition;
+
+varying vec2 texCoord;
+varying vec2 screenCoord;
+
+void main(void) {
+    gl_Position = vec4(aPosition, 0.0, 1.0);
+    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
+    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
+}
+</script>
+<script id="bg_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+
+uniform vec2 uTimes;
+
+varying vec2 texCoord;
+varying vec2 screenCoord;
+
+void main(void) {
+    vec3 col;
+    float c;
+    vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
+    c = exp(-pow(length(tmpv) * 1.8, 2.0));
+    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
+    gl_FragColor = vec4(col * 0.5, 1.0);
+}
+</script>
+<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+uniform sampler2D uSrc;
+uniform vec2 uDelta;
+
+varying vec2 texCoord;
+varying vec2 screenCoord;
+
+void main(void) {
+    vec4 col = texture2D(uSrc, texCoord);
+    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
+}
+</script>
+<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+uniform sampler2D uSrc;
+uniform vec2 uDelta;
+uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
+
+varying vec2 texCoord;
+varying vec2 screenCoord;
+
+void main(void) {
+    vec4 col = texture2D(uSrc, texCoord);
+    col = col + texture2D(uSrc, texCoord + uBlurDir.xy * uDelta);
+    col = col + texture2D(uSrc, texCoord - uBlurDir.xy * uDelta);
+    col = col + texture2D(uSrc, texCoord + (uBlurDir.xy + uBlurDir.zw) * uDelta);
+    col = col + texture2D(uSrc, texCoord - (uBlurDir.xy + uBlurDir.zw) * uDelta);
+    gl_FragColor = col / 5.0;
+}
+</script>
+<!-- effect fragment shader template -->
+<script id="fx_common_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+uniform sampler2D uSrc;
+uniform vec2 uDelta;
+
+varying vec2 texCoord;
+varying vec2 screenCoord;
+
+void main(void) {
+    gl_FragColor = texture2D(uSrc, texCoord);
+}
+</script>
+<!-- post processing -->
+<script id="pp_final_vsh" type="x-shader/x_vertex">
+uniform vec3 uResolution;
+attribute vec2 aPosition;
+varying vec2 texCoord;
+varying vec2 screenCoord;
+void main(void) {
+    gl_Position = vec4(aPosition, 0.0, 1.0);
+    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
+    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
+}
+</script>
+<script id="pp_final_fsh" type="x-shader/x_fragment">
+#ifdef GL_ES
+//precision mediump float;
+precision highp float;
+#endif
+uniform sampler2D uSrc;
+uniform sampler2D uBloom;
+uniform vec2 uDelta;
+varying vec2 texCoord;
+varying vec2 screenCoord;
+void main(void) {
+    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;
+    vec4 bloomcol = texture2D(uBloom, texCoord);
+    vec4 col;
+    col = srccol + bloomcol * (vec4(1.0) + srccol);
+    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);
+    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)
+
+    gl_FragColor = vec4(col.rgb, 1.0);
+    gl_FragColor.a = 1.0;
+}
+</script>
 </html>
