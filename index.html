@@ -1,297 +1,161 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Phoogerheide's github</title>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
-  <script src="myScript.js"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<canvas id="sakura"></canvas>
-<div class="btnbg">
-</div>
 
-<!-- sakura shader -->
-<script id="sakura_point_vsh" type="x-shader/x_vertex">
-uniform mat4 uProjection;
-uniform mat4 uModelview;
-uniform vec3 uResolution;
-uniform vec3 uOffset;
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-attribute vec3 aPosition;
-attribute vec3 aEuler;
-attribute vec2 aMisc; //x:size, y:fade
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i>  <span class="light">Return to</span> Top
+                </a>
+            </div>
 
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Downloads</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Test</h1>
+                        <p class="intro-text">Simple website.<br>Created by Start Bootstrap.</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
+    <!-- About Section -->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>About </h2>
+                <p> </p>
+                <p> </p>
+                <p> </p>
+            </div>
+        </div>
+    </section>
 
-void main(void) {
-    // Projection is based on vertical angle
-    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);
-    gl_Position = uProjection * pos;
-    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;
+    <!-- Download Section -->
+    <section id="download" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Download</h2>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    pposition = pos.xyz;
-    psize = aMisc.x;
-    pdist = length(pos.xyz);
-    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact</h2>
+                <p>Email</p>
+                <p><a href="mailto:feedback@example.com">feedback@example.com</a>
+                </p>
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="https://twitter.com" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    vec3 elrsn = sin(aEuler);
-    vec3 elrcs = cos(aEuler);
-    mat3 rotx = mat3(
-        1.0, 0.0, 0.0,
-        0.0, elrcs.x, elrsn.x,
-        0.0, -elrsn.x, elrcs.x
-    );
-    mat3 roty = mat3(
-        elrcs.y, 0.0, -elrsn.y,
-        0.0, 1.0, 0.0,
-        elrsn.y, 0.0, elrcs.y
-    );
-    mat3 rotz = mat3(
-        elrcs.z, elrsn.z, 0.0,
-        -elrsn.z, elrcs.z, 0.0,
-        0.0, 0.0, 1.0
-    );
-    mat3 rotmat = rotx * roty * rotz;
-    normal = rotmat[2];
+    <!-- Map Section -->
+    <div id="map"></div>
 
-    mat3 trrotm = mat3(
-        rotmat[0][0], rotmat[1][0], rotmat[2][0],
-        rotmat[0][1], rotmat[1][1], rotmat[2][1],
-        rotmat[0][2], rotmat[1][2], rotmat[2][2]
-    );
-    normX = trrotm[0];
-    normY = trrotm[1];
-    normZ = trrotm[2];
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Your Website 2016</p>
+        </div>
+    </footer>
 
-    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-    float tmpdfs = dot(lit, normal);
-    if(tmpdfs < 0.0) {
-        normal = -normal;
-        tmpdfs = dot(lit, normal);
-    }
-    diffuse = 0.4 + tmpdfs;
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-    vec3 eyev = normalize(-pos.xyz);
-    if(dot(eyev, normal) > 0.0) {
-        vec3 hv = normalize(eyev + lit);
-        specular = pow(max(dot(hv, normal), 0.0), 20.0);
-    }
-    else {
-        specular = 0.0;
-    }
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
 
-    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);
-    rstop = pow(rstop, 0.5);
-    //-0.69315 = ln(0.5)
-    distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
-}
-</script>
-<script id="sakura_point_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
 
-const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
+</body>
 
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
-
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
-
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
-
-float ellipse(vec2 p, vec2 o, vec2 r) {
-    vec2 lp = (p - o) / r;
-    return length(lp) - 1.0;
-}
-
-void main(void) {
-    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.0;
-    vec3 d = vec3(0.0, 0.0, -1.0);
-    float nd = normZ.z; //dot(-normZ, d);
-    if(abs(nd) < 0.0001) discard;
-
-    float np = dot(normZ, p);
-    vec3 tp = p + d * np / nd;
-    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));
-
-    //angle = 15 degree
-    const float flwrsn = 0.258819045102521;
-    const float flwrcs = 0.965925826289068;
-    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);
-    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;
-
-    float r;
-    if(flwrp.x < 0.0) {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);
-    }
-    else {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);
-    }
-
-    if(r > rstop) discard;
-
-    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);
-    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));
-    col *= vec3(1.0, grady, grady);
-    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));
-    col = col * diffuse + specular;
-
-    col = mix(fadeCol, col, distancefade);
-
-    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;
-    alpha = smoothstep(0.0, 1.0, alpha) * palpha;
-
-    gl_FragColor = vec4(col * 0.5, alpha);
-}
-</script>
-<!-- effects -->
-<script id="fx_common_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-<script id="bg_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec2 uTimes;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec3 col;
-    float c;
-    vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
-    c = exp(-pow(length(tmpv) * 1.8, 2.0));
-    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
-    gl_FragColor = vec4(col * 0.5, 1.0);
-}
-</script>
-<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
-}
-</script>
-<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    col = col + texture2D(uSrc, texCoord + uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord - uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord + (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    col = col + texture2D(uSrc, texCoord - (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    gl_FragColor = col / 5.0;
-}
-</script>
-<!-- effect fragment shader template -->
-<script id="fx_common_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_FragColor = texture2D(uSrc, texCoord);
-}
-</script>
-<!-- post processing -->
-<script id="pp_final_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-<script id="pp_final_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform sampler2D uBloom;
-uniform vec2 uDelta;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;
-    vec4 bloomcol = texture2D(uBloom, texCoord);
-    vec4 col;
-    col = srccol + bloomcol * (vec4(1.0) + srccol);
-    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);
-    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)
-
-    gl_FragColor = vec4(col.rgb, 1.0);
-    gl_FragColor.a = 1.0;
-}
-</script>
 </html>
